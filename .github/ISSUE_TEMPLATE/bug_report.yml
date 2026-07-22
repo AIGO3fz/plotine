@@ -1,0 +1,32 @@
+name: Bug report
+description: Something renders wrong or panics
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Attach a minimal repro when possible.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Expected vs actual behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: Rust snippet using the Figure builder
+      render: rust
+  - type: input
+    id: version
+    attributes:
+      label: plotine version / commit
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS / Rust version

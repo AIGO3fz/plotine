@@ -1,0 +1,187 @@
+# plotine
+
+> High-level, LLM-friendly Rust native scientific plotting library (static 2D + basic 3D).
+> Spiritual successor to Plotters: publication defaults, type-safe APIs, actionable errors.
+
+Version: 0.5.0 · License: MIT · MSRV: 1.85
+Defaults: 6.4×4.8 in (matplotlib figsize) @ 150 DPI; theme title/label/tick = 12/10/10 pt (stock mpl rcParams)
+
+## Docs for agents
+
+- [AGENTS.md](AGENTS.md): idioms, common mistakes, migration notes
+- [llms-full.txt](llms-full.txt): fuller API + examples in one file
+- [book/](book/): mdBook user guide (`mdbook serve book`)
+- [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md): architecture & roadmap (Chinese)
+- [docs/MPL_2D_COVERAGE.md](docs/MPL_2D_COVERAGE.md): matplotlib static 2D coverage checklist
+- [docs/API_FREEZE.md](docs/API_FREEZE.md): stability tiers toward 1.0-rc
+- [README.md](README.md): human quick start
+
+## Quick API
+
+```rust
+use plotine::prelude::*;
+
+fn main() -> plotine::Result<()> {
+    let x: Vec<f64> = (0..100).map(|i| i as f64 * 0.1).collect();
+    let y: Vec<f64> = x.iter().map(|v| v.sin()).collect();
+    Figure::new()
+        .axes(|ax| {
+            ax.line(&x, &y).color(Color::CRIMSON).width(2.0).label("sin");
+            ax.title("Demo").x_label("x").y_label("y").legend(Legend::Best); // or TopRight / …
+        })
+        .save("out.png")?; // also .svg / .pdf
+    Ok(())
+}
+```
+
+## Charts
+
+| Method | Notes |
+|---|---|
+| `ax.line(x, y)` | polyline |
+| `ax.scatter(x, y)` | markers; `.size(r)` |
+| `ax.bar(x, heights)` / `ax.barh(y, widths)` | vertical / horizontal bars; `.hatch(Hatch::…)` |
+| `ax.hist(data)` | `.bins(n)` / `.hatch(Hatch::…)` |
+| `ax.area(x, y)` | filled to baseline; `.alpha` / `.baseline` |
+| `ax.fill_between(x, y1, y2)` / `fill_betweenx` | band between curves |
+| `ax.step(x, y)` | `.mode(StepMode::Pre\|Mid\|Post)` |
+| `ax.stairs(edges, values)` | `edges.len() == values.len() + 1` |
+| `ax.stem(x, y)` | stems + markers; `.baseline` |
+| `ax.hlines` / `ax.vlines` / `ax.axhline` / `ax.axvline` | segments / full-span refs |
+| `ax.axhspan` / `ax.axvspan` | full-domain bands |
+| `ax.polygon(x, y)` | closed fill |
+| `ax.pie(sizes)` | `.labels([...])` |
+| `ax.stackplot(x, ys)` | stacked areas; `.labels` |
+| `ax.eventplot(rows)` | event ticks per row |
+| `ax.broken_barh(xranges, (y, h))` | gantt-like bars |
+| `ax.errorbar(x, y, yerr)` | vertical caps; `.xerr` / `.yerr_asym` / `.xerr_asym` |
+| `ax.heatmap(nrows, ncols, values)` | `.cmap` / `.colorbar` / `.extent` / `.alpha` |
+| `ax.hist2d(x, y)` / `ax.hexbin(x, y)` | density; `.bins` / `.gridsize` / `.cmap` |
+| `ax.contour` / `ax.contourf(nrows, ncols, z)` | `.levels` / `.clabel(true)` / `.clabel_size` |
+| `ax.pcolormesh(x_edges, y_edges, values)` | irregular grid pseudocolor |
+| `ax.spy(nrows, ncols, values)` | nonzero pattern markers |
+| `ax.quiver(x, y, u, v)` | arrows; `.scale` / `.quiverkey` |
+| `ax.barbs(x, y, u, v)` | wind barbs; `.length` / `.flip` / `.increments` |
+| `ax.streamplot(nrows, ncols, u, v)` | `.density(1.0)` / `.arrow_size(1.0)` (mpl-like) |
+| `ax.polar_line` / `polar_scatter` / `polar_frame` | θ,r (rad) + polar grid |
+| `ax.text(x, y, s)` | data-coord label; `.ha` / `.va` / `.size` |
+| `ax.annotate(s, xy, xytext)` | callout; `.arrow` / `.arrow_style(ArrowStyle::…)` |
+| `ax.twin_y(\|ax2\| { ... })` | right y-axis; host legend merges labels |
+| `ax.twin_x(\|ax2\| { ... })` | top x-axis; shared y |
+| `.grid_linestyle(LineStyle::Dashed)` | dashed/dotted grid (with `.grid(true)`) |
+| `.title_fontsize` / `x_label_fontsize` / `y_label_fontsize` | per-axes pt overrides |
+| `Legend::OutsideUpperRight` / `OutsideRight` / `OutsideLowerRight` | legend outside axes (right gutter) |
+| `ax.x_tick_formatter` / `y_tick_formatter(TickFormatter::…)` | custom tick labels (`fixed`/`percent`/`new`) |
+| `ax.rectangle` / `circle` / `ellipse` | data-coord patches; rect supports `.hatch` |
+| `$\\alpha$` / `$\\frac{a}{b}$` / `$\\sqrt{x}$` / `pmatrix` | mathtext layout (no LaTeX binary); or `math::unicode` string rewrite |
+| CJK titles/labels (`feature = "cjk"`) | `plotine::fonts::load_system_cjk()` or `register_font_file(path)` before render |
+| `ax.table([[..]]).col_labels(..).loc(TableLoc::…)` | overlay table (axes fraction) |
+| `ax.x_categories([...])` | labels at `0..n`; use `category_indices(n)` |
+| `.norm(Norm::Log)` | LogNorm on heatmap / hist2d / hexbin / … |
+| `ax.boxplot(groups)` | Tukey |
+| `ax.violin(groups)` | Gaussian KDE |
+| `Figure::axes3d(\|ax\| { … })` | static 3D panel (not mixed with 2D panels) |
+| `ax.plot3d` / `scatter3d` | 3D line / markers; `.elev` / `.azim` |
+| `ax.surface(nx, ny, z)` / `wireframe` | grid `z` row-major; `.x` / `.y` / `.cmap` |
+| `ax.bar3d(x, y, z)` | 3D bars; `.dx` / `.dy` / `.color` |
+| `ax.contour3d(nx, ny, z)` | iso-z contours; `.levels` / `.x` / `.y` |
+| `ax.quiver3d(x,y,z,u,v,w)` | 3D arrows; `.scale` / `.color` (static; no rotate) |
+
+## Features
+
+| Feature | Purpose |
+|---|---|
+| `png` (default) | tiny-skia PNG |
+| `svg` (default) | deterministic SVG |
+| `pdf` (default) | vector PDF via SVG→svg2pdf |
+| `pgf` | PGF/TikZ for LaTeX documents |
+| `eps` | EPS via Ghostscript (`gs` on PATH) |
+| `polars` | `plotine::polars::xy(&df, "x", "y")` |
+| `ndarray` | `Array1` / `heatmap_array` |
+| `evcxr` | `Figure::evcxr_display()` for Jupyter |
+| `cjk` | CJK font fallback (system fonts) |
+| `gui` | Interactive window: `Figure::show()` / `show_with` |
+| `gif` | `Animation::save_gif` |
+| `mp4` | `Animation::save_mp4` (needs `ffmpeg`) |
+| `latex` | `Figure::usetex(true)` external LaTeX rendering |
+
+## Hard rules for codegen
+
+1. Always `Figure::new()...` — no global state
+2. Set `x_scale` / `y_scale` **before** adding artists when using Log/Symlog
+3. `save` format comes from extension (`.png` / `.svg` / `.pdf`)
+4. Prefer `Color::CRIMSON` constants; `Color::from_str("crimson")` / `"#dc143c"` also work
+5. Labels: `$...$` mathtext or `math::unicode` — default; `usetex(true)` + `feature = "latex"` for external TeX
+6. Save format from extension: `.png` / `.svg` / `.pdf` / `.pgf` (`.eps` needs `feature = "eps"` + Ghostscript)
+7. Read `PlotError` `suggestion` fields — they tell you how to fix
+
+## Interactive GUI (`feature = "gui"`)
+
+```rust
+Figure::new().axes(|ax| { ax.line(&x, &y); }).show()?; // blocking window
+```
+
+Pan/zoom (2D), elev/azim drag (3D), Home/Back/Forward, Save PNG/SVG/PDF.
+Side-panel widgets via `show_with(|ui, fig| { … })` (egui Slider/Button).
+Not included: Configure Subplots, picking, `ion()`, Qt/Tk backends.
+Prefer `.save` for scripts/CI; use `.show` only when exploration is needed.
+
+## Offline animation (M10)
+
+```rust
+let anim = fig.animate(0..30, |fig, i| {
+    fig.axes_at_mut(0).unwrap().line_at_mut(0).unwrap().set_y(&y_at(i))?;
+    Ok(())
+})?.interval_ms(50);
+anim.save_png_sequence("frames")?;
+anim.save_gif("out.gif")?; // features = ["gif"]
+```
+
+Fix `x_range`/`y_range` before animating (`set_y` does not auto-rescale). No GUI required.
+Or rebuild each frame: `Animation::map(0..n, |i| Ok(Figure::new().axes(...)))`.
+
+## Geographic maps (M11)
+
+```rust
+ax.projection(GeoProjection::Mercator); // or PlateCarree
+ax.coastline();
+ax.scatter(&lons, &lats); // degrees → projected plane
+```
+
+Cartopy-thin only (no shapefile / multi-CRS). Coastline = embedded Natural Earth 110m.
+
+## pyplot facade (opt-in only)
+
+Separate crate `plotine-pyplot`. **Do not use for default codegen** — prefer `Figure` builder.
+Only when migrating pyplot-style scripts: `plt::plot` / `subplots` / `savefig` / `clf`.
+
+## External LaTeX (`feature = "latex"`)
+
+```rust
+Figure::new().usetex(true).axes(|ax| { ax.title(r"$x^2$"); }).save("out.png")?;
+```
+
+Requires system `latex` + `dvipng`. Default codegen: built-in mathtext only (no `usetex`).
+
+## Post-M8 alignment (M9–M13 done)
+
+See `docs/DEVELOPMENT_PLAN.md` §1.2. Default codegen: `Figure` builder + `.save` + built-in mathtext.
+
+1. ~~Interactive GUI (M9)~~ — `features = ["gui"]` + `Figure::show`
+2. ~~Animation (M10)~~ — `Figure::animate` / `Animation` / `features = ["gif"]`
+3. ~~Geographic projections (M11)~~ — `GeoProjection` / `coastline`
+4. ~~pyplot facade (M12)~~ — crate `plotine-pyplot` (opt-in)
+5. ~~External LaTeX (M13)~~ — `feature = "latex"` / `Figure::usetex`
+
+## Examples (run locally)
+
+```bash
+cargo run -p plotine --example gallery
+cargo run -p plotine --example matplotlib_compare
+cargo run -p plotine --example interactive_show --features gui
+cargo run -p plotine --example animate_wave --features gif
+cargo run -p plotine --example usetex_demo --features latex
+python scripts/size_benchmark.py   # M9–M13 size/time vs matplotlib
+cargo test -p plotine
+cargo test -p plotine --features latex --test m13_latex
+```

@@ -1,0 +1,19 @@
+[book]
+title = "plotine"
+description = "High-level, LLM-friendly Rust native scientific plotting library (static 2D + basic 3D)"
+authors = ["AIGO3fz"]
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+site-url = "/plotine/"
+git-repository-url = "https://github.com/AIGO3fz/plotine"
+edit-url-template = "https://github.com/AIGO3fz/plotine/edit/main/book/src/{path}"
+default-theme = "light"
+preferred-dark-theme = "navy"
+
+[output.html.search]
+enable = true

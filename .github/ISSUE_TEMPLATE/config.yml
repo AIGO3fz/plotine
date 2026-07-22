@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Matplotlib gap scores
+    url: https://github.com/AIGO3fz/plotine/blob/main/docs/MPL_GAP.md
+    about: Relative alignment scores and non-goals vs matplotlib
+  - name: Agent idioms
+    url: https://github.com/AIGO3fz/plotine/blob/main/AGENTS.md
+    about: Preferred API patterns for coding agents

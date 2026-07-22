@@ -1,0 +1,35 @@
+name: Feature request
+description: Request a capability or matplotlib alignment item
+title: "[feat] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What should plotine gain?
+    validations:
+      required: true
+  - type: dropdown
+    id: gap
+    attributes:
+      label: Related gap dimension (see docs/MPL_GAP.md)
+      options:
+        - Output formats
+        - Interaction / exploration
+        - Ecosystem / integration
+        - Docs / community
+        - Static 2D / visual fidelity
+        - Other
+  - type: textarea
+    id: mpl
+    attributes:
+      label: matplotlib equivalent (if any)
+      description: Function name or docs link
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: I read docs/MPL_GAP.md non-goals (no full Qt/Tk / geopandas / SO)
+          required: false

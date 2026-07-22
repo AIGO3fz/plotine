@@ -1,0 +1,4 @@
+# Contributor default. MSRV is declared in Cargo.toml (`rust-version = "1.85"`).
+[toolchain]
+channel = "stable"
+components = ["rustfmt", "clippy"]

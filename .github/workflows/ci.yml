@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -Dwarnings
+
+jobs:
+  test:
+    name: test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: cargo build --workspace
+      - name: Test (exclude visual snapshots on non-Linux)
+        run: cargo test --workspace -- --skip snapshot_
+        if: matrix.os != 'ubuntu-latest'
+      - name: Test
+        run: cargo test --workspace
+        if: matrix.os == 'ubuntu-latest'
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: Format check
+        run: cargo fmt --all -- --check
+
+  features:
+    name: features (polars + ndarray + evcxr + cjk + gif)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Test optional features
+        run: cargo test -p plotine --features polars,ndarray,evcxr,cjk,gif
+      - name: Clippy optional features
+        run: cargo clippy -p plotine --all-targets --features polars,ndarray,evcxr,cjk,gif -- -D warnings
+      - name: Maturity extras (gif + M9–M17 contracts)
+        run: cargo test -p plotine --features gif --test m9_m17_maturity
+
+  wasm:
+    name: wasm32 compile check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - name: Check plotine-core for wasm
+        run: cargo check -p plotine-core --target wasm32-unknown-unknown
+
+  mdbook:
+    name: mdbook
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mdBook
+        run: |
+          curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz \
+            | tar -xz
+          echo "$PWD" >> "$GITHUB_PATH"
+      - name: Build guide
+        run: mdbook build book

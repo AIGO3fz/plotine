@@ -1,0 +1,108 @@
+[package]
+name = "plotine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+description = "A high-level, LLM-friendly Rust native scientific plotting library (static 2D + basic 3D)"
+readme = "../../README.md"
+documentation.workspace = true
+categories.workspace = true
+keywords.workspace = true
+exclude = ["tests/snapshots/"]
+
+[features]
+default = ["png", "svg", "pdf", "pgf"]
+png = ["dep:plotine-backend-skia", "dep:png"]
+svg = ["dep:plotine-backend-svg"]
+pdf = ["svg", "dep:plotine-backend-pdf"]
+## PGF/TikZ vector export (`.pgf`). Implies `svg` text stack only via render path.
+pgf = ["dep:plotine-backend-pgf"]
+## EPS via Ghostscript (`gs`) from PDF. Requires system Ghostscript.
+eps = ["pdf", "dep:tempfile"]
+ndarray = ["dep:ndarray"]
+polars = ["dep:polars"]
+evcxr = ["png", "dep:base64"]
+## System / user CJK font loading (`plotine::fonts`). Does **not** embed a CJK face.
+cjk = []
+## Interactive window: pan/zoom, 3D rotate, export (egui/winit). Implies `png`.
+gui = ["png", "dep:eframe", "dep:egui", "dep:rfd"]
+## Animated GIF export (`Animation::save_gif`). Implies `png`.
+gif = ["png", "dep:gif"]
+## MP4 via system `ffmpeg` (`Animation::save_mp4`). Implies `png`.
+mp4 = ["png", "dep:tempfile"]
+## External LaTeX (`Figure::usetex`); requires system `latex` + `dvipng`. Implies `png`.
+latex = ["png", "dep:tempfile"]
+
+[dependencies]
+plotine-core = { workspace = true }
+plotine-render = { workspace = true }
+plotine-text = { workspace = true }
+plotine-backend-skia = { workspace = true, optional = true }
+plotine-backend-svg = { workspace = true, optional = true }
+plotine-backend-pdf = { workspace = true, optional = true }
+plotine-backend-pgf = { workspace = true, optional = true }
+kurbo = { workspace = true }
+ndarray = { workspace = true, optional = true }
+polars = { workspace = true, optional = true }
+base64 = { workspace = true, optional = true }
+png = { workspace = true, optional = true }
+gif = { version = "0.13", optional = true }
+tempfile = { version = "3", optional = true }
+eframe = { version = "0.31", optional = true, default-features = true }
+egui = { version = "0.31", optional = true }
+rfd = { version = "0.15", optional = true }
+
+[dev-dependencies]
+insta = { workspace = true }
+tempfile = "3"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[package.metadata.docs.rs]
+# Build docs.rs with most features enabled so optional API is visible.
+# Exclude `gui` (needs windowing system) and `cjk` (needs system fonts).
+features = ["png", "svg", "pdf", "pgf", "eps", "ndarray", "polars", "evcxr", "gif", "mp4", "latex"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[[bench]]
+name = "hotspots"
+harness = false
+
+[[example]]
+name = "polars_line"
+required-features = ["polars"]
+
+[[example]]
+name = "ndarray_demo"
+required-features = ["ndarray"]
+
+[[example]]
+name = "evcxr_usage"
+required-features = ["evcxr"]
+
+[[example]]
+name = "cjk_labels"
+required-features = ["cjk"]
+
+[[example]]
+name = "interactive_show"
+required-features = ["gui"]
+
+[[example]]
+name = "interactive_widgets"
+required-features = ["gui"]
+
+[[example]]
+name = "animate_wave"
+required-features = ["gif"]
+
+[[example]]
+name = "export_formats"
+required-features = ["pgf"]
+
+[[example]]
+name = "usetex_demo"
+required-features = ["latex"]

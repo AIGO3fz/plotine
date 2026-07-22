@@ -1,0 +1,21 @@
+[package]
+name = "plotine-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation = "https://docs.rs/plotine-core"
+authors.workspace = true
+description = "Core geometry, color, transforms, scales, and ticks for plotine"
+readme = "../../README.md"
+categories.workspace = true
+keywords.workspace = true
+
+[dependencies]
+kurbo = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+proptest = "1"

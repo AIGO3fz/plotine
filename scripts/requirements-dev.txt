@@ -1,0 +1,11 @@
+# Development-only Python dependencies for comparison / benchmark scripts.
+# Not required for building or using plotine.
+#
+# Install:  pip install -r scripts/requirements-dev.txt
+
+numpy
+matplotlib
+pillow
+
+# Optional — only needed for geo comparison scripts:
+# cartopy

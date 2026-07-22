@@ -1,0 +1,169 @@
+# plotine — full agent reference
+
+Status: 0.5.0 · M0–M17 landed · first crates.io upload pending (`cargo login`)
+Crate: `plotine` · Workspace: plotine-core / plotine-render / plotine-text / plotine-backend-{skia,svg,pdf,pgf} / plotine-pyplot
+
+## 1. Mental model
+
+Immediate-mode static export (not reactive):
+
+```
+Figure → Axes panel(s) → artists (line/bar/…) → Renderer (PNG|SVG) → file/bytes
+```
+
+Recipes convert data → geometry (paths/rects/markers). Backends only implement a small `Renderer` trait.
+
+## 2. Prelude
+
+```rust
+use plotine::prelude::*;
+// Figure, Axes, GridSpec, SubplotGrid, Legend, Theme,
+// Series, IntoSeries, Color, Colormap, ScaleType, PlotError, Result
+```
+
+## 3. Figure API
+
+```rust
+Figure::new()                 // 6.4×4.8 in @ 150 DPI (mpl figsize; sharper DPI), Theme::light
+    .size(w_in, h_in)
+    .dpi(dpi)
+    .theme(Theme::dark())
+    .axes(|ax| { /* single panel */ })
+    .subplots(nrows, ncols, |g| { g.at(r, c, |ax| { ... }); })
+    .subplots_with(GridSpec::new(r, c), |g| { ... })
+    .save("out.png")?;        // or .svg / .pdf
+    .render_png()?;           // Vec<u8>
+    .render_svg()?;           // String (deterministic)
+    .evcxr_display()?;        // feature = "evcxr"
+```
+
+Empty figures (no axes/subplots) error with `PlotError::EmptyFigure`.
+
+## 4. Axes API
+
+Chrome: `title`, `x_label`, `y_label`, `x_range`, `y_range`, `grid(bool)`, `legend(Legend)`,
+`x_scale` / `y_scale` (`Linear`|`Log`|`Symlog`), `x_datetime` / `y_datetime`.
+
+Artists (each returns a builder for style chains):
+
+```rust
+ax.line(x, y).color(c).width(w).label(s);
+ax.scatter(x, y).size(r).color(c).label(s);
+ax.bar(x, heights).width(w).color(c).label(s);
+ax.barh(y, widths).height(h).color(c).label(s);
+ax.hist(data).bins(n).color(c).label(s);
+ax.area(x, y).baseline(b).alpha(a).color(c).label(s);
+ax.fill_between(x, y1, y2).alpha(a).color(c).label(s);
+ax.fill_betweenx(y, x1, x2).alpha(a).color(c).label(s);
+ax.step(x, y).mode(StepMode::Pre).width(w).color(c).label(s);
+ax.stairs(edges, values).width(w).color(c).label(s); // edges.len() == values.len()+1
+ax.stem(x, y).baseline(b).marker_size(r).color(c).label(s);
+ax.hlines(y, xmin, xmax).width(w).color(c); // xmin/xmax: scalar or series
+ax.vlines(x, ymin, ymax).width(w).color(c);
+ax.axhline(y).width(w).color(c);
+ax.axvline(x).width(w).color(c);
+ax.axhspan(ymin, ymax).alpha(a).color(c).label(s);
+ax.axvspan(xmin, xmax).alpha(a).color(c).label(s);
+ax.polygon(x, y).alpha(a).color(c).label(s);
+ax.pie(sizes).labels(["A", "B"]).start_angle(90.0);
+ax.stackplot(x, [y0, y1]).labels(["a", "b"]).alpha(a);
+ax.eventplot([row0, row1]).labels(["r0", "r1"]).lineoffset(0.8);
+ax.broken_barh([(xmin, width), ...], (y_center, height)).color(c);
+ax.errorbar(x, y, yerr).color(c).label(s);
+ax.heatmap(nrows, ncols, values).cmap(Colormap::Viridis).colorbar(true);
+ax.hist2d(x, y).bins(20).cmap(Colormap::Viridis).colorbar(true);
+ax.hexbin(x, y).gridsize(20).cmap(Colormap::Plasma).colorbar(true);
+ax.contour(nrows, ncols, z).levels(8).color(c).width(w).clabel(true).clabel_size(9.0);
+ax.contourf(nrows, ncols, z).levels(10).cmap(Colormap::Viridis).colorbar(true);
+ax.barbs(x, y, u, v).length(9.0).flip(false).increments(5.0, 10.0, 50.0);
+ax.pcolormesh(x_edges, y_edges, values).cmap(Colormap::Plasma); // edges: n+1
+ax.spy(nrows, ncols, z).precision(1e-8).marker_size(r);
+ax.quiver(x, y, u, v).scale(s).quiverkey(1.0, "1").color(c);
+ax.streamplot(nrows, ncols, u, v).density(1.0).arrow_size(1.0).width(w).color(c);
+ax.polar_line(theta, r).color(c).width(w); // theta in radians
+ax.polar_scatter(theta, r).size(s);
+ax.polar_frame(rmax).rings(4).spokes(8);
+ax.text(x, y, "label").color(c).size(pt).ha(TextAlign::Center).va(TextBaseline::Bottom);
+ax.annotate("peak", (x, y), (xt, yt)).arrow(true).color(c).arrow_color(Color::SPINE);
+ax.twin_y(|ax2| { ax2.line(x, y2).label("right"); ax2.y_label("right"); }); // shared x
+ax.twin_x(|ax2| { ax2.line(x2, y).label("top"); ax2.x_label("top"); }); // shared y
+ax.y_label(math::unicode(r"$\theta$ (rad)")); // or write "θ (rad)" directly
+ax.x_label(format!("x{}", math::sup("2"))); // → x²
+ax.x_categories(["A", "B", "C"]); ax.bar(&category_indices(3), heights);
+ax.heatmap(n, m, z).norm(Norm::Log).colorbar(true); // domain must be > 0
+ax.heatmap_array(&array2); // feature = "ndarray"
+ax.boxplot([&g0[..], &g1[..]]).widths(w).color(c);
+ax.violin([&g0[..], &g1[..]]).widths(w).alpha(a).color(c);
+```
+
+Data accepts anything implementing `IntoSeries` (`f64` scalar, `&[f64]`, `Vec<f64>`, arrays, `f32` slices, ndarray with feature).
+Coverage vs matplotlib: `docs/MPL_2D_COVERAGE.md`.
+
+## 5. Themes & colors
+
+```rust
+Theme::light()  // default
+Theme::dark()
+Theme::paper()
+
+Color::CRIMSON, STEEL_BLUE, FOREST_GREEN, MEDIUM_PURPLE, …
+Color::rgb(r, g, b)
+Color::from_str("crimson") / Color::from_str("#dc143c")  // convenience; constants preferred
+Colormap::Viridis | Plasma | Inferno | Magma | Cividis
+Legend::TopLeft | TopRight | BottomLeft | BottomRight
+```
+
+Unlabeled artists still get an automatic color cycle.
+
+## 6. Errors (all carry `suggestion`)
+
+| Variant | Typical cause |
+|---|---|
+| `InvalidRange` | min ≥ max or non-finite |
+| `LogScaleNonPositive` | log domain ≤ 0 |
+| `EmptyFigure` | save without axes |
+| `UnsupportedFormat` | bad extension / disabled feature |
+| `LengthMismatch` | x/y(/yerr) lengths |
+| `HeatmapSizeMismatch` | flat buffer length |
+| `ColumnNotFound` / `ColumnNotNumeric` | polars helpers |
+| `Io` / `Render` / `Text` | filesystem / backend / font |
+
+## 7. Polars / ndarray / evcxr
+
+```rust
+// cargo add plotine --features polars
+let (x, y) = plotine::polars::xy(&df, "x", "y")?;
+Figure::new().axes(|ax| { ax.line(&x, &y); }).save("out.png")?;
+
+// --features ndarray
+ax.heatmap_array(&arr2);
+
+// --features evcxr
+figure.evcxr_display()?;
+```
+
+## 8. Examples index
+
+| Example | Purpose |
+|---|---|
+| `gallery` | 20 figures → `./gallery/` |
+| `matplotlib_compare` | plotine side of mpl comparison → `./compare/` |
+| `line_sine`, `scatter_demo`, `bar_hist_area` | core charts |
+| `log_and_themes`, `subplots_demo`, `datetime_axis` | M2 |
+| `heatmap_demo`, `boxplot_demo`, `violin_demo` | M3 |
+| `polars_line`, `ndarray_demo`, `evcxr_usage` | features |
+
+## 9. Architecture pointers
+
+- `crates/plotine` — public facade
+- `crates/plotine-core` — color, scale, ticks, transform, errors
+- `crates/plotine-render` — `Renderer` trait + styles
+- `crates/plotine-text` — cosmic-text + embedded DejaVu Sans
+- `crates/plotine-backend-skia` — PNG
+- `crates/plotine-backend-svg` — SVG
+
+## 10. See also
+
+- AGENTS.md — idioms & anti-patterns
+- docs/DEVELOPMENT_PLAN.md — design rationale (Chinese)
+- CHANGELOG.md — release notes

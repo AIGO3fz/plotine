@@ -1,0 +1,48 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/plotine",
+    "crates/plotine-core",
+    "crates/plotine-render",
+    "crates/plotine-text",
+    "crates/plotine-backend-skia",
+    "crates/plotine-backend-svg",
+    "crates/plotine-backend-pdf",
+    "crates/plotine-backend-pgf",
+    "crates/plotine-pyplot",
+]
+default-members = ["crates/plotine"]
+
+[workspace.package]
+version = "0.5.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT"
+repository = "https://github.com/AIGO3fz/plotine"
+homepage = "https://github.com/AIGO3fz/plotine"
+documentation = "https://docs.rs/plotine"
+authors = ["AIGO3fz"]
+categories = ["visualization", "graphics"]
+keywords = ["plot", "chart", "visualization", "graphics"]
+
+[workspace.dependencies]
+plotine = { path = "crates/plotine", version = "0.5.0" }
+plotine-core = { path = "crates/plotine-core", version = "0.5.0" }
+plotine-render = { path = "crates/plotine-render", version = "0.5.0" }
+plotine-text = { path = "crates/plotine-text", version = "0.5.0" }
+plotine-backend-skia = { path = "crates/plotine-backend-skia", version = "0.5.0" }
+plotine-backend-svg = { path = "crates/plotine-backend-svg", version = "0.5.0" }
+plotine-backend-pdf = { path = "crates/plotine-backend-pdf", version = "0.5.0" }
+plotine-backend-pgf = { path = "crates/plotine-backend-pgf", version = "0.5.0" }
+plotine-pyplot = { path = "crates/plotine-pyplot", version = "0.5.0" }
+
+kurbo = "0.11"
+svg2pdf = "0.13"
+tiny-skia = "0.11"
+png = "0.17"
+cosmic-text = "0.14"
+thiserror = "2"
+insta = "1"
+ndarray = "0.16"
+polars = { version = "0.54", default-features = false, features = ["dtype-full"] }
+base64 = "0.22"

@@ -1,0 +1,18 @@
+[package]
+name = "plotine-text"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation = "https://docs.rs/plotine-text"
+authors.workspace = true
+description = "Text shaping and measurement for plotine (cosmic-text + embedded DejaVu Sans)"
+readme = "../../README.md"
+categories.workspace = true
+keywords.workspace = true
+
+[dependencies]
+plotine-core = { workspace = true }
+cosmic-text = { workspace = true }

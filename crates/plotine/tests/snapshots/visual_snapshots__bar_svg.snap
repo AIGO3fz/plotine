@@ -1,0 +1,65 @@
+---
+source: crates/plotine/tests/visual_snapshots.rs
+assertion_line: 846
+expression: svg
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="288" height="216" viewBox="0 0 288 216">
+<defs>
+<clipPath id="c0"><rect x="36" y="25.92" width="223.2" height="166.32" /></clipPath>
+</defs>
+<rect x="0" y="0" width="288" height="216" fill="#ffffff" />
+<rect x="36" y="25.92" width="223.2" height="166.32" fill="#fafbfc" />
+<path d="M67.504 25.92 L67.504 192.24" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M120.901 25.92 L120.901 192.24" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M174.299 25.92 L174.299 192.24" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M227.696 25.92 L227.696 192.24" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M36 192.24 L259.2 192.24" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M36 169.611 L259.2 169.611" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M36 146.983 L259.2 146.983" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M36 124.354 L259.2 124.354" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M36 101.726 L259.2 101.726" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M36 79.097 L259.2 79.097" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M36 56.469 L259.2 56.469" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<path d="M36 33.84 L259.2 33.84" fill="none" stroke="#dee2e6" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" />
+<rect x="46.145" y="124.354" width="42.718" height="67.886" fill="#4682b4" clip-path="url(#c0)" />
+<rect x="46.145" y="124.354" width="42.718" height="67.886" fill="none" stroke="rgba(73,80,87,0.549)" stroke-width="0.9" clip-path="url(#c0)" />
+<rect x="99.543" y="33.84" width="42.718" height="158.4" fill="#4682b4" clip-path="url(#c0)" />
+<rect x="99.543" y="33.84" width="42.718" height="158.4" fill="none" stroke="rgba(73,80,87,0.549)" stroke-width="0.9" clip-path="url(#c0)" />
+<rect x="152.94" y="146.983" width="42.718" height="45.257" fill="#4682b4" clip-path="url(#c0)" />
+<rect x="152.94" y="146.983" width="42.718" height="45.257" fill="none" stroke="rgba(73,80,87,0.549)" stroke-width="0.9" clip-path="url(#c0)" />
+<rect x="206.337" y="79.097" width="42.718" height="113.143" fill="#4682b4" clip-path="url(#c0)" />
+<rect x="206.337" y="79.097" width="42.718" height="113.143" fill="none" stroke="rgba(73,80,87,0.549)" stroke-width="0.9" clip-path="url(#c0)" />
+<rect x="36" y="25.92" width="223.2" height="166.32" fill="none" stroke="#495057" stroke-width="0.95" />
+<path d="M67.504 192.24 L67.504 197.24" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="67.504" y="200.74" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="middle" dominant-baseline="text-before-edge">1</text>
+<path d="M120.901 192.24 L120.901 197.24" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="120.901" y="200.74" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="middle" dominant-baseline="text-before-edge">2</text>
+<path d="M174.299 192.24 L174.299 197.24" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="174.299" y="200.74" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="middle" dominant-baseline="text-before-edge">3</text>
+<path d="M227.696 192.24 L227.696 197.24" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="227.696" y="200.74" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="middle" dominant-baseline="text-before-edge">4</text>
+<path d="M31 192.24 L36 192.24" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="27.5" y="192.24" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="end" dominant-baseline="middle">0</text>
+<path d="M31 169.611 L36 169.611" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="27.5" y="169.611" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="end" dominant-baseline="middle">1</text>
+<path d="M31 146.983 L36 146.983" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="27.5" y="146.983" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="end" dominant-baseline="middle">2</text>
+<path d="M31 124.354 L36 124.354" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="27.5" y="124.354" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="end" dominant-baseline="middle">3</text>
+<path d="M31 101.726 L36 101.726" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="27.5" y="101.726" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="end" dominant-baseline="middle">4</text>
+<path d="M31 79.097 L36 79.097" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="27.5" y="79.097" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="end" dominant-baseline="middle">5</text>
+<path d="M31 56.469 L36 56.469" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="27.5" y="56.469" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="end" dominant-baseline="middle">6</text>
+<path d="M31 33.84 L36 33.84" fill="none" stroke="#495057" stroke-width="0.9" stroke-linecap="butt" stroke-linejoin="miter" />
+<text x="27.5" y="33.84" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="end" dominant-baseline="middle">7</text>
+<text x="147.6" y="15.92" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" text-anchor="middle" dominant-baseline="text-after-edge">Bars</text>
+<text x="147.6" y="206.24" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="middle" dominant-baseline="text-before-edge">x</text>
+<text x="12" y="109.08" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 12 109.08)">y</text>
+<rect x="184.777" y="30.92" width="69.423" height="18" fill="rgba(255,255,255,0.800)" />
+<rect x="184.777" y="30.92" width="69.423" height="18" fill="none" stroke="rgba(73,80,87,0.702)" stroke-width="0.8" />
+<rect x="188.777" y="36.42" width="20" height="7" fill="#4682b4" />
+<text x="216.777" y="39.92" fill="#000000" font-family="DejaVu Sans, Arial, sans-serif" font-size="10" text-anchor="start" dominant-baseline="middle">counts</text>
+</svg>

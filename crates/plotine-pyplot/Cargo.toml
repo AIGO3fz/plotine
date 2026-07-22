@@ -1,0 +1,31 @@
+[package]
+name = "plotine-pyplot"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+description = "Optional matplotlib.pyplot-style facade over plotine (global state; not the primary API)"
+readme = "README.md"
+documentation.workspace = true
+categories.workspace = true
+keywords = ["plot", "pyplot", "matplotlib", "visualization"]
+
+[features]
+default = []
+## Forward `plt::show` to `plotine` interactive GUI.
+gui = ["plotine/gui"]
+
+[dependencies]
+plotine = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"
+
+[[example]]
+name = "migrate_pyplot"
+
+[[example]]
+name = "pyplot_size_benchmark"

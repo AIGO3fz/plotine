@@ -1,0 +1,57 @@
+# Product L1 benchmark (docs/BENCHMARK.md). Not on every PR — noise + time.
+name: Benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      tier:
+        description: "smoke (Tier S) | default (Tier A) | stress (A+B)"
+        required: true
+        default: smoke
+        type: choice
+        options:
+          - smoke
+          - default
+          - stress
+  schedule:
+    # Weekly Monday 06:00 UTC — Tier S smoke only
+    - cron: "0 6 * * 1"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  bench:
+    name: bench (${{ github.event.inputs.tier || 'smoke' }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python deps
+        run: pip install matplotlib numpy
+
+      - name: Run benchmark
+        env:
+          BENCH_TIER: ${{ github.event.inputs.tier || 'smoke' }}
+        run: |
+          TIER="${BENCH_TIER}"
+          echo "Running tier=${TIER}"
+          python scripts/benchmark.py --tier "${TIER}"
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-results-${{ github.event.inputs.tier || 'smoke' }}
+          path: |
+            compare/bench/results.csv
+            compare/bench/results.md
+          if-no-files-found: error

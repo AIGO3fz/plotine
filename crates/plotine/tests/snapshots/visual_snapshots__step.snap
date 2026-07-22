@@ -1,0 +1,7 @@
+---
+source: crates/plotine/tests/visual_snapshots.rs
+assertion_line: 641
+expression: png
+extension: png
+snapshot_kind: binary
+---
