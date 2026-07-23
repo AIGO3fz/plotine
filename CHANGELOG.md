@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.5.2] — 2026-07-23
+
+### Fixed
+- README: convert all relative links and image paths to absolute GitHub URLs so
+  they render correctly on crates.io (which resolves paths relative to the crate
+  directory, not the repository root).
+
 ## [0.5.1] — 2026-07-23
 
 ### Changed

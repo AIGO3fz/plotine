@@ -3449,7 +3449,7 @@ dependencies = [
 
 [[package]]
 name = "plotine"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "base64",
  "criterion",
@@ -3474,7 +3474,7 @@ dependencies = [
 
 [[package]]
 name = "plotine-backend-pdf"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "kurbo 0.11.3",
  "plotine-backend-svg",
@@ -3486,7 +3486,7 @@ dependencies = [
 
 [[package]]
 name = "plotine-backend-pgf"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "base64",
  "kurbo 0.11.3",
@@ -3498,7 +3498,7 @@ dependencies = [
 
 [[package]]
 name = "plotine-backend-skia"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "kurbo 0.11.3",
  "plotine-core",
@@ -3510,7 +3510,7 @@ dependencies = [
 
 [[package]]
 name = "plotine-backend-svg"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "base64",
  "kurbo 0.11.3",
@@ -3522,7 +3522,7 @@ dependencies = [
 
 [[package]]
 name = "plotine-core"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "kurbo 0.11.3",
  "proptest",
@@ -3531,7 +3531,7 @@ dependencies = [
 
 [[package]]
 name = "plotine-pyplot"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "plotine",
  "tempfile",
@@ -3539,7 +3539,7 @@ dependencies = [
 
 [[package]]
 name = "plotine-render"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "kurbo 0.11.3",
  "plotine-core",
@@ -3547,7 +3547,7 @@ dependencies = [
 
 [[package]]
 name = "plotine-text"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "cosmic-text",
  "plotine-core",

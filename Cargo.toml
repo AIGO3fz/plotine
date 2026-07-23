@@ -14,7 +14,7 @@ members = [
 default-members = ["crates/plotine"]
 
 [workspace.package]
-version = "0.5.1"
+version = "0.5.2"
 edition = "2021"
 rust-version = "1.85"
 license = "MIT"
@@ -26,15 +26,15 @@ categories = ["visualization", "graphics"]
 keywords = ["plot", "chart", "visualization", "graphics"]
 
 [workspace.dependencies]
-plotine = { path = "crates/plotine", version = "0.5.1" }
-plotine-core = { path = "crates/plotine-core", version = "0.5.1" }
-plotine-render = { path = "crates/plotine-render", version = "0.5.1" }
-plotine-text = { path = "crates/plotine-text", version = "0.5.1" }
-plotine-backend-skia = { path = "crates/plotine-backend-skia", version = "0.5.1" }
-plotine-backend-svg = { path = "crates/plotine-backend-svg", version = "0.5.1" }
-plotine-backend-pdf = { path = "crates/plotine-backend-pdf", version = "0.5.1" }
-plotine-backend-pgf = { path = "crates/plotine-backend-pgf", version = "0.5.1" }
-plotine-pyplot = { path = "crates/plotine-pyplot", version = "0.5.1" }
+plotine = { path = "crates/plotine", version = "0.5.2" }
+plotine-core = { path = "crates/plotine-core", version = "0.5.2" }
+plotine-render = { path = "crates/plotine-render", version = "0.5.2" }
+plotine-text = { path = "crates/plotine-text", version = "0.5.2" }
+plotine-backend-skia = { path = "crates/plotine-backend-skia", version = "0.5.2" }
+plotine-backend-svg = { path = "crates/plotine-backend-svg", version = "0.5.2" }
+plotine-backend-pdf = { path = "crates/plotine-backend-pdf", version = "0.5.2" }
+plotine-backend-pgf = { path = "crates/plotine-backend-pgf", version = "0.5.2" }
+plotine-pyplot = { path = "crates/plotine-pyplot", version = "0.5.2" }
 
 kurbo = "0.11"
 svg2pdf = "0.13"

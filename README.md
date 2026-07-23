@@ -1,30 +1,30 @@
 # plotine
 
-**English** | [中文](README.zh-CN.md)
+**English** | [中文](https://github.com/AIGO3fz/plotine/blob/main/README.zh-CN.md)
 
 A high-level, LLM-friendly **Rust native scientific plotting library** (static 2D + basic 3D).
 
 > Publication-quality defaults, type-safe APIs that fail at compile time when possible, and errors that tell agents how to fix themselves. Visual defaults track stock matplotlib — the API stays Rust-native.
 >
-> Post-M8 alignment: **M9–M13** done; **M14–M17** add EPS/PGF/MP4, non-blocking GUI + widgets, stats/GeoJSON, docs. Gap scores: [`docs/MPL_GAP.md`](docs/MPL_GAP.md).
+> Post-M8 alignment: **M9–M13** done; **M14–M17** add EPS/PGF/MP4, non-blocking GUI + widgets, stats/GeoJSON, docs. Gap scores: [`docs/MPL_GAP.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/MPL_GAP.md).
 
 ## Status
 
 **v0.5.1** — M0–M8 static charts + M9–M17 (GUI, animation, geo, pyplot façade, LaTeX,
-PGF/EPS/MP4, widgets, stats/GeoJSON, docs). Gap scores: [`docs/MPL_GAP.md`](docs/MPL_GAP.md).
-First crates.io upload: follow [`docs/RELEASING.md`](docs/RELEASING.md) (`cargo login` required).
+PGF/EPS/MP4, widgets, stats/GeoJSON, docs). Gap scores: [`docs/MPL_GAP.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/MPL_GAP.md).
+First crates.io upload: follow [`docs/RELEASING.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/RELEASING.md) (`cargo login` required).
 
 ## Gallery
 
 <p align="center">
-  <img src="docs/images/02_line.png" width="32%" alt="line" />
-  <img src="docs/images/18_heatmap.png" width="32%" alt="heatmap" />
-  <img src="docs/images/30_contour_pcolor.png" width="32%" alt="contour" />
+  <img src="https://raw.githubusercontent.com/AIGO3fz/plotine/main/docs/images/02_line.png" width="32%" alt="line" />
+  <img src="https://raw.githubusercontent.com/AIGO3fz/plotine/main/docs/images/18_heatmap.png" width="32%" alt="heatmap" />
+  <img src="https://raw.githubusercontent.com/AIGO3fz/plotine/main/docs/images/30_contour_pcolor.png" width="32%" alt="contour" />
 </p>
 <p align="center">
-  <img src="docs/images/44_surface_3d.png" width="32%" alt="surface 3d" />
-  <img src="docs/images/52_mathtext.png" width="32%" alt="mathtext" />
-  <img src="docs/images/69_geo_map.png" width="32%" alt="geo map" />
+  <img src="https://raw.githubusercontent.com/AIGO3fz/plotine/main/docs/images/44_surface_3d.png" width="32%" alt="surface 3d" />
+  <img src="https://raw.githubusercontent.com/AIGO3fz/plotine/main/docs/images/52_mathtext.png" width="32%" alt="mathtext" />
+  <img src="https://raw.githubusercontent.com/AIGO3fz/plotine/main/docs/images/69_geo_map.png" width="32%" alt="geo map" />
 </p>
 
 Full set: `cargo run -p plotine --example gallery` → `./gallery/`.
@@ -94,7 +94,7 @@ Figure::new().axes(|ax| { ax.line(&x, &y); }).evcxr_display()?;
 
 End-to-end `Figure` build + export (release, median of 7 iters after 2 warmups;
 5.0×3.5 in @ 150 DPI). Numbers below are indicative (Windows laptop); re-run
-locally or via the [Benchmark](.github/workflows/benchmark.yml) workflow.
+locally or via the [Benchmark](https://github.com/AIGO3fz/plotine/blob/main/.github/workflows/benchmark.yml) workflow.
 
 | Scenario | plotine | matplotlib | speedup |
 |---|---:|---:|---:|
@@ -104,7 +104,7 @@ locally or via the [Benchmark](.github/workflows/benchmark.yml) workflow.
 | `layout.subplots_2x2` | ~12 ms | ~112 ms | ~9× |
 | `fmt.svg_line_n1000` | ~0.7 ms | ~25 ms | ~35× |
 
-`speedup` = mpl / plotine (>1 ⇒ plotine faster). See [`docs/BENCHMARK.md`](docs/BENCHMARK.md)
+`speedup` = mpl / plotine (>1 ⇒ plotine faster). See [`docs/BENCHMARK.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/BENCHMARK.md)
 for the full suite (`smoke` / `default` / `stress` tiers).
 
 ```bash
@@ -142,29 +142,29 @@ cargo bench -p plotine --bench hotspots -- --quick   # L2 Criterion (maintainers
 
 | Document | Description |
 |----------|-------------|
-| [`book/`](book/) | mdBook user guide + tutorials (`mdbook serve book`) |
-| [`docs/MPL_GAP.md`](docs/MPL_GAP.md) | Feature comparison & scores vs matplotlib |
-| [`docs/API_FREEZE.md`](docs/API_FREEZE.md) | 0.5 → 1.0-rc API stability review |
-| [`docs/RELEASING.md`](docs/RELEASING.md) | crates.io publish cadence & checklist |
-| [`docs/BENCHMARK.md`](docs/BENCHMARK.md) | Benchmark design (scenarios + methodology) |
-| [`docs/GUI_TOOLBAR.md`](docs/GUI_TOOLBAR.md) | Interactive GUI capability matrix |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md) | PR workflow & visual-review expectations |
-| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Community standards (Contributor Covenant) |
-| [`SECURITY.md`](SECURITY.md) | Vulnerability reporting policy |
-| [`AGENTS.md`](AGENTS.md) | Idioms & migration guide for coding agents |
-| [`llms.txt`](llms.txt) / [`llms-full.txt`](llms-full.txt) | LLM-oriented API index |
-| [`CHANGELOG.md`](CHANGELOG.md) | Release history & breaking changes |
+| [`book/`](https://github.com/AIGO3fz/plotine/tree/main/book) | mdBook user guide + tutorials (`mdbook serve book`) |
+| [`docs/MPL_GAP.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/MPL_GAP.md) | Feature comparison & scores vs matplotlib |
+| [`docs/API_FREEZE.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/API_FREEZE.md) | 0.5 → 1.0-rc API stability review |
+| [`docs/RELEASING.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/RELEASING.md) | crates.io publish cadence & checklist |
+| [`docs/BENCHMARK.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/BENCHMARK.md) | Benchmark design (scenarios + methodology) |
+| [`docs/GUI_TOOLBAR.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/GUI_TOOLBAR.md) | Interactive GUI capability matrix |
+| [`CONTRIBUTING.md`](https://github.com/AIGO3fz/plotine/blob/main/CONTRIBUTING.md) | PR workflow & visual-review expectations |
+| [`CODE_OF_CONDUCT.md`](https://github.com/AIGO3fz/plotine/blob/main/CODE_OF_CONDUCT.md) | Community standards (Contributor Covenant) |
+| [`SECURITY.md`](https://github.com/AIGO3fz/plotine/blob/main/SECURITY.md) | Vulnerability reporting policy |
+| [`AGENTS.md`](https://github.com/AIGO3fz/plotine/blob/main/AGENTS.md) | Idioms & migration guide for coding agents |
+| [`llms.txt`](https://github.com/AIGO3fz/plotine/blob/main/llms.txt) / [`llms-full.txt`](https://github.com/AIGO3fz/plotine/blob/main/llms-full.txt) | LLM-oriented API index |
+| [`CHANGELOG.md`](https://github.com/AIGO3fz/plotine/blob/main/CHANGELOG.md) | Release history & breaking changes |
 
 ### 中文 (Chinese)
 
 | 文档 | 说明 |
 |------|------|
-| [`docs/DEVELOPMENT_PLAN.md`](docs/DEVELOPMENT_PLAN.md) | 顶层架构设计 & 里程碑路线图 / Architecture & roadmap |
-| [`docs/MPL_2D_COVERAGE.md`](docs/MPL_2D_COVERAGE.md) | matplotlib 静态 2D 图型覆盖清单 / Chart coverage checklist |
+| [`docs/DEVELOPMENT_PLAN.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/DEVELOPMENT_PLAN.md) | 顶层架构设计 & 里程碑路线图 / Architecture & roadmap |
+| [`docs/MPL_2D_COVERAGE.md`](https://github.com/AIGO3fz/plotine/blob/main/docs/MPL_2D_COVERAGE.md) | matplotlib 静态 2D 图型覆盖清单 / Chart coverage checklist |
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](https://github.com/AIGO3fz/plotine/blob/main/LICENSE).
 Embedded DejaVu Sans retains its own license (see `crates/plotine-text/fonts/LICENSE`).
 Natural Earth 110m coastline data is public domain.
-Full third-party attribution: [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md).
+Full third-party attribution: [`THIRD_PARTY_LICENSES.md`](https://github.com/AIGO3fz/plotine/blob/main/THIRD_PARTY_LICENSES.md).
