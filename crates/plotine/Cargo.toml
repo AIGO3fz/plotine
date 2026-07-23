@@ -54,7 +54,7 @@ gif = { version = "0.13", optional = true }
 tempfile = { version = "3", optional = true }
 eframe = { version = "0.31", optional = true, default-features = true }
 egui = { version = "0.31", optional = true }
-rfd = { version = "0.15", optional = true }
+rfd = { version = "0.17", optional = true }
 
 [dev-dependencies]
 insta = { workspace = true }
