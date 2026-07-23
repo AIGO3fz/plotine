@@ -3457,7 +3457,7 @@ dependencies = [
  "egui",
  "gif 0.13.3",
  "insta",
- "kurbo 0.11.3",
+ "kurbo 0.13.1",
  "ndarray",
  "plotine-backend-pdf",
  "plotine-backend-pgf",
@@ -3476,7 +3476,7 @@ dependencies = [
 name = "plotine-backend-pdf"
 version = "0.5.0"
 dependencies = [
- "kurbo 0.11.3",
+ "kurbo 0.13.1",
  "plotine-backend-svg",
  "plotine-core",
  "plotine-render",
@@ -3489,7 +3489,7 @@ name = "plotine-backend-pgf"
 version = "0.5.0"
 dependencies = [
  "base64",
- "kurbo 0.11.3",
+ "kurbo 0.13.1",
  "plotine-core",
  "plotine-render",
  "plotine-text",
@@ -3500,7 +3500,7 @@ dependencies = [
 name = "plotine-backend-skia"
 version = "0.5.0"
 dependencies = [
- "kurbo 0.11.3",
+ "kurbo 0.13.1",
  "plotine-core",
  "plotine-render",
  "plotine-text",
@@ -3513,7 +3513,7 @@ name = "plotine-backend-svg"
 version = "0.5.0"
 dependencies = [
  "base64",
- "kurbo 0.11.3",
+ "kurbo 0.13.1",
  "plotine-core",
  "plotine-render",
  "plotine-text",
@@ -3524,7 +3524,7 @@ dependencies = [
 name = "plotine-core"
 version = "0.5.0"
 dependencies = [
- "kurbo 0.11.3",
+ "kurbo 0.13.1",
  "proptest",
  "thiserror 2.0.18",
 ]
@@ -3541,7 +3541,7 @@ dependencies = [
 name = "plotine-render"
 version = "0.5.0"
 dependencies = [
- "kurbo 0.11.3",
+ "kurbo 0.13.1",
  "plotine-core",
 ]
 
