@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - name: Build
@@ -37,13 +37,15 @@ jobs:
     env:
       CARGO_BUILD_JOBS: "2"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      - name: Test optional features (lib + tests only, skip examples to avoid linker OOM)
-        run: cargo test -p plotine --features polars,ndarray,evcxr,cjk,gif --lib --tests -- --skip snapshot_
+      - name: Check optional features compile
+        run: cargo check -p plotine --features polars,ndarray,evcxr,cjk,gif
+      - name: Test lib unit tests (skip integration tests to avoid linker OOM with polars)
+        run: cargo test -p plotine --features polars,ndarray,evcxr,cjk,gif --lib
       - name: Clippy optional features
-        run: cargo clippy -p plotine --features polars,ndarray,evcxr,cjk,gif --lib --tests -- -D warnings
+        run: cargo clippy -p plotine --features polars,ndarray,evcxr,cjk,gif --lib -- -D warnings
       - name: Maturity extras (gif + M9–M17 contracts)
         run: cargo test -p plotine --features gif --test m9_m17_maturity
 
@@ -51,7 +53,7 @@ jobs:
     name: wasm32 compile check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
@@ -63,7 +65,7 @@ jobs:
     name: mdbook
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install mdBook
         run: |
           curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz \
