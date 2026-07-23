@@ -20,7 +20,7 @@ fn load_system_cjk_and_render_title() {
         .size(4.0, 3.0)
         .dpi(72.0)
         .axes(|ax| {
-            ax.line(&[0.0, 1.0], &[0.0, 1.0]);
+            ax.line([0.0, 1.0], [0.0, 1.0]);
             ax.title("测试标题").x_label("横轴").y_label("纵轴");
         })
         .render_png()
