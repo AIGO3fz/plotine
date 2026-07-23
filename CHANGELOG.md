@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.5.1] — 2026-07-23
+
+### Changed
+- Remove "Plotters' spiritual successor" framing from README, llms.txt, book, and
+  development plan. plotine is an independent project; matplotlib is credited for
+  visual-default alignment only.
+
 ## [0.5.0] — 2026-07-22
 
 ### Changed

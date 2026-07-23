@@ -36,7 +36,7 @@ Visual defaults track stock matplotlib; the API stays Rust-native (pyplot facade
 | M16 (stats + GeoJSON) | Complete |
 | M17 (gap docs + tutorials + CONTRIBUTING) | Complete |
 
-MSRV: **1.85**. License: **MIT**. Version: **0.5.0**. Gap scores: repo `docs/MPL_GAP.md`.
+MSRV: **1.85**. License: **MIT**. Version: **0.5.1**. Gap scores: repo `docs/MPL_GAP.md`.
 
 ## Where to go next
 

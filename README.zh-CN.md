@@ -8,7 +8,7 @@
 
 ## 状态
 
-**v0.5.0** — 核心静态图表（M0–M8）+ 交互 GUI、动画、地理投影、pyplot 门面、LaTeX、
+**v0.5.1** — 核心静态图表（M0–M8）+ 交互 GUI、动画、地理投影、pyplot 门面、LaTeX、
 PGF/EPS/MP4、Widget、stats/GeoJSON、文档（M9–M17）全部完成。
 功能对比评分：[`docs/MPL_GAP.md`](docs/MPL_GAP.md)。
 

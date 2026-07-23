@@ -16,10 +16,10 @@ Edit root `Cargo.toml`:
 
 ```toml
 [workspace.package]
-version = "0.5.0"   # bump here; all members inherit
+version = "0.5.1"   # bump here; all members inherit
 ```
 
-Workspace path deps already pin `version = "0.5.0"` — keep them in lockstep.
+Workspace path deps already pin `version = "0.5.1"` — keep them in lockstep.
 
 ## Preflight
 
@@ -68,7 +68,7 @@ Wait ~60s between crates if crates.io index lag causes “not found” errors.
 ## After publish
 
 1. Verify <https://crates.io/crates/plotine> and <https://docs.rs/plotine>
-2. `git tag v0.5.0` && `git push origin v0.5.0` (retag only if the existing tag
+2. `git tag v0.5.1` && `git push origin v0.5.1` (retag only if the existing tag
    does not match the published commit)
 3. GitHub Release with CHANGELOG section
 4. Mark the version released in `CHANGELOG.md`

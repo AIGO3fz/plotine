@@ -1,6 +1,6 @@
 # plotine — full agent reference
 
-Status: 0.5.0 · M0–M17 landed · first crates.io upload pending (`cargo login`)
+Status: 0.5.1 · M0–M17 landed · first crates.io upload pending (`cargo login`)
 Crate: `plotine` · Workspace: plotine-core / plotine-render / plotine-text / plotine-backend-{skia,svg,pdf,pgf} / plotine-pyplot
 
 ## 1. Mental model

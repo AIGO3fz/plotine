@@ -10,7 +10,7 @@ A high-level, LLM-friendly **Rust native scientific plotting library** (static 2
 
 ## Status
 
-**v0.5.0** — M0–M8 static charts + M9–M17 (GUI, animation, geo, pyplot façade, LaTeX,
+**v0.5.1** — M0–M8 static charts + M9–M17 (GUI, animation, geo, pyplot façade, LaTeX,
 PGF/EPS/MP4, widgets, stats/GeoJSON, docs). Gap scores: [`docs/MPL_GAP.md`](docs/MPL_GAP.md).
 First crates.io upload: follow [`docs/RELEASING.md`](docs/RELEASING.md) (`cargo login` required).
 
