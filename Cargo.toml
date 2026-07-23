@@ -43,6 +43,6 @@ png = "0.17"
 cosmic-text = "0.14"
 thiserror = "2"
 insta = "1"
-ndarray = "0.16"
+ndarray = "0.17"
 polars = { version = "0.54", default-features = false, features = ["dtype-full"] }
 base64 = "0.22"
