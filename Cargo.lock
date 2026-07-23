@@ -3455,7 +3455,7 @@ dependencies = [
  "criterion",
  "eframe",
  "egui",
- "gif 0.13.3",
+ "gif 0.14.2",
  "insta",
  "kurbo 0.11.3",
  "ndarray",
