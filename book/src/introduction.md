@@ -3,7 +3,7 @@
 **plotine** is a high-level, LLM-friendly Rust native scientific plotting library
 (static 2D + basic 3D).
 
-It aims to be Plotters' spiritual successor: publication-quality defaults, a
+It provides publication-quality defaults, a
 small predictable API surface, and errors that tell agents how to fix themselves.
 Visual defaults track stock matplotlib; the API stays Rust-native (pyplot facade = M12 opt-in).
 

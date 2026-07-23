@@ -4,7 +4,7 @@
 
 A high-level, LLM-friendly **Rust native scientific plotting library** (static 2D + basic 3D).
 
-> Plotters' spiritual successor: publication-quality defaults, type-safe APIs that fail at compile time when possible, and errors that tell agents how to fix themselves. Visual defaults track stock matplotlib — the API stays Rust-native.
+> Publication-quality defaults, type-safe APIs that fail at compile time when possible, and errors that tell agents how to fix themselves. Visual defaults track stock matplotlib — the API stays Rust-native.
 >
 > Post-M8 alignment: **M9–M13** done; **M14–M17** add EPS/PGF/MP4, non-blocking GUI + widgets, stats/GeoJSON, docs. Gap scores: [`docs/MPL_GAP.md`](docs/MPL_GAP.md).
 

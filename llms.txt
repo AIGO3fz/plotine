@@ -1,7 +1,7 @@
 # plotine
 
 > High-level, LLM-friendly Rust native scientific plotting library (static 2D + basic 3D).
-> Spiritual successor to Plotters: publication defaults, type-safe APIs, actionable errors.
+> Publication defaults, type-safe APIs, actionable errors.
 
 Version: 0.5.0 · License: MIT · MSRV: 1.85
 Defaults: 6.4×4.8 in (matplotlib figsize) @ 150 DPI; theme title/label/tick = 12/10/10 pt (stock mpl rcParams)
