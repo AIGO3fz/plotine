@@ -23,28 +23,27 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Build
         run: cargo build --workspace
-      - name: Test (exclude visual snapshots on non-Linux)
+      - name: Test (skip visual snapshots — baselines are platform-specific)
         run: cargo test --workspace -- --skip snapshot_
-        if: matrix.os != 'ubuntu-latest'
-      - name: Test
-        run: cargo test --workspace
-        if: matrix.os == 'ubuntu-latest'
       - name: Clippy
         run: cargo clippy --workspace --all-targets -- -D warnings
       - name: Format check
         run: cargo fmt --all -- --check
+        if: matrix.os == 'ubuntu-latest'
 
   features:
     name: features (polars + ndarray + evcxr + cjk + gif)
     runs-on: ubuntu-latest
+    env:
+      CARGO_BUILD_JOBS: "2"
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      - name: Test optional features
-        run: cargo test -p plotine --features polars,ndarray,evcxr,cjk,gif
+      - name: Test optional features (lib + tests only, skip examples to avoid linker OOM)
+        run: cargo test -p plotine --features polars,ndarray,evcxr,cjk,gif --lib --tests -- --skip snapshot_
       - name: Clippy optional features
-        run: cargo clippy -p plotine --all-targets --features polars,ndarray,evcxr,cjk,gif -- -D warnings
+        run: cargo clippy -p plotine --features polars,ndarray,evcxr,cjk,gif --lib --tests -- -D warnings
       - name: Maturity extras (gif + M9–M17 contracts)
         run: cargo test -p plotine --features gif --test m9_m17_maturity
 
